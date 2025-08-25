@@ -1,15 +1,14 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import Custombg from "@/components/Custombg";
+import Header from "@/components/Header";
+import { ConvexClientProvider } from "./ConvexClientProvider";
+import { ClerkProvider } from "@clerk/nextjs";
+import { shadesOfPurple } from "@clerk/themes";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({subsets: ["latin"]})
 
 export const metadata = {
   title: "Create Next App",
@@ -18,11 +17,30 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.className}`}
       >
-        {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ClerkProvider appearance={{cssLayerName: "clerk", baseTheme: shadesOfPurple}}>
+            <ConvexClientProvider>
+              <Header />
+              <main className="bg-gray-900 min-h-screen text-white overflow-x-hidden">
+                <Custombg />
+                <Toaster richColors/>
+                {children}
+              </main>
+
+            </ConvexClientProvider>
+
+            </ClerkProvider>
+            
+          </ThemeProvider>
       </body>
     </html>
   );
