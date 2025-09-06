@@ -29,8 +29,9 @@ export const create = mutation({
         }
     }
 
-    await ctx.db.insert("projects", {
+    const projectId = await ctx.db.insert("projects", {
         title: args.title,
+        userId: user._id,
         originalImageUrl: args.originalImageUrl,
         currentImageUrl: args.currentImageUrl,
         thumbnailUrl: args.thumbnailUrl,
@@ -54,6 +55,10 @@ export const create = mutation({
 export const getUserProjects =  query({
     handler: async(ctx) => {
         const user = await ctx.runQuery(internal.users.getCurrentUser);
+
+        if(!user) {
+            return [];
+        }
 
         const projects = await ctx.db
             .query("projects")

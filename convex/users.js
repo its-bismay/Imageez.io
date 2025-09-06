@@ -1,4 +1,5 @@
 import { mutation, query } from "./_generated/server";
+import { v } from "convex/values"
 
 export const store = mutation({
   args: {},
@@ -47,7 +48,7 @@ export const getCurrentUser = query({
         const identity = await ctx.auth.getUserIdentity();
 
         if(!identity) {
-            throw new Error("Not authenticated");
+            return null;
         }
 
         const user = await ctx.db
@@ -58,7 +59,7 @@ export const getCurrentUser = query({
         .unique();
 
         if(!user) {
-            throw new Error("User not found");
+            return null;
         }
 
         return user;
