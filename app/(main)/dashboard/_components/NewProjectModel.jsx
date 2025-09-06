@@ -20,6 +20,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { UpgradeModal } from "@/components/UpgradeModal";
 
 const NewProjectModel = ({ isOpen, onClose }) => {
   const router = useRouter();
@@ -256,6 +257,8 @@ const NewProjectModel = ({ isOpen, onClose }) => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <UpgradeModal isOpen={showUpgradeModal} onClose={() => setShowUpgradeModal(false)} restrictedTool="projects" reason="Free plan is limited to 5 projects. Upgrade to Pro for unlimited projects and access to all tools"/>
     </>
   );
 };
