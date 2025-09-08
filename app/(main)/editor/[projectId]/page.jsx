@@ -6,8 +6,8 @@ import { Loader2, Monitor } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import EditorTopBar from "./_components/EditorTopBar";
-import EditorSidebar from "./_components/EditorSidebar";
 import CanvasEditor from "./_components/CanvasEditor";
+import { EditorSidebar } from "./_components/EditorSidebar";
 
 export default function Editor() {
   const params = useParams();
@@ -88,10 +88,10 @@ export default function Editor() {
               </div>
             )}
 
-            {/* <EditorTopBar project={project} /> */}
+            <EditorTopBar project={project} />
 
             <div className="flex flex-1 overflow-hidden">
-              {/* <EditorSidebar project={project} /> */}
+              <EditorSidebar project={project} />
 
               <div className="flex-1 bg-slate-800">
                 <CanvasEditor project={project} activeTool={activeTool} />
