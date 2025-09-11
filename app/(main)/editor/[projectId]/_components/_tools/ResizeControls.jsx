@@ -135,7 +135,9 @@ const ResizeControls = ({ project }) => {
 
   useEffect(() => {
     if (!isLoading && data) {
-      window.location.reload();
+      setTimeout(() => {
+        window.dispatchEvent(new Event("resize"));
+      }, 500)
     }
   }),
     [data, isLoading];
