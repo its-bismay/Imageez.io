@@ -8,6 +8,7 @@ import { useState } from "react";
 import EditorTopBar from "./_components/EditorTopBar";
 import CanvasEditor from "./_components/CanvasEditor";
 import { EditorSidebar } from "./_components/EditorSidebar";
+import { RingLoader } from "react-spinners";
 
 export default function Editor() {
   const params = useParams();
